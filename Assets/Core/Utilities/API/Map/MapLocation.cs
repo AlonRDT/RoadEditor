@@ -7,8 +7,8 @@ namespace Utilities.API.Map
 {
     public static class MapLocation
     {
-        private static int s_SquaresPerDimension = 200;
-        private static int s_TerrainSize = 1000;
+        private static int s_SquaresPerDimension = 200; // amount of squares in terrain
+        private static int s_TerrainSize = 1000; // world size of terrain
         private static float s_SquareSize => (float)s_TerrainSize / s_SquaresPerDimension;
 
         public static Vector3 GetSquareCenterFromPosition(Vector3 position)

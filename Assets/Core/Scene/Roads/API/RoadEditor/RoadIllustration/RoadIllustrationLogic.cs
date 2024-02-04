@@ -3,14 +3,17 @@ using Scene.Roads.API.Factory;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities.API.Map;
 
 namespace Scene.Roads.API.RoadEditor.RoadIllustration
 {
     public class RoadIllustrationLogic : MonoBehaviour
     {
-        private Transform m_RoadEndJunctionTransform;
-        private Transform m_TubesParent;
-        private Transform[] m_TubeTransforms;
+        private Transform m_RoadEndJunctionTransform; // the indicator that whows where new junction will be spawned
+        private Transform m_TubesParent; // an empty object that aggregates all tubes
+        private Transform[] m_TubeTransforms; // the transforms of the tubes which the path illustration consists of
+        private JunctionLogic m_SelectedJunction = null;
+        public JunctionLogic SelectedJunction => m_SelectedJunction;
 
         // visual illustration parameters
         private float m_SpaceBetweenTubes = 7f;
@@ -37,6 +40,12 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
                 m_TubeTransforms[i].localScale = new Vector3(1, 1, m_TubeSize);
             }
         }
+
+        public void SelectJunction(JunctionLogic junction)
+        {
+            m_SelectedJunction = junction;
+            transform.position = m_SelectedJunction.transform.position;
+        }    
 
         public void UpdateVisual(Vector3 mousePosition)
         {
@@ -76,6 +85,11 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
             {
                 t.gameObject.SetActive(false);
             }
+        }
+
+        public int[] GetEndPointSuqareIndex()
+        {
+            return MapLocation.GetSquareIndexFromPosition(m_RoadEndJunctionTransform.position);
         }
     }
 }

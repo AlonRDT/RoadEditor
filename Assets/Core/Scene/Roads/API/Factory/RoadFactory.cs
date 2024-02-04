@@ -35,11 +35,14 @@ namespace Scene.Roads.API.Factory
             m_UnlitOrangeMaterial = DataLoader.LoadFromResources<Material>(m_UnlitOrangeMaterialAdress);
         }
 
-
         // Junctions
-        public static GameObject ConstructJunction(Vector3 position)
+        public static JunctionLogic ConstructJunction(int[] squareIndex)
         {
-            return GameObject.Instantiate(m_RoadNodeBuiltJunctionPrefab, position, Quaternion.identity);
+            GameObject newJunction = GameObject.Instantiate(m_RoadNodeBuiltJunctionPrefab, Vector3.zero, Quaternion.identity);
+            JunctionLogic output = newJunction.AddComponent<JunctionLogic>();
+            output.Initialize(squareIndex);
+
+            return output;
         }
 
         public static GameObject ConstructJunctionIllustration()
@@ -95,6 +98,18 @@ namespace Scene.Roads.API.Factory
             newRoadIllustrationObject.transform.position = position;
 
             output = newRoadIllustrationObject.gameObject.AddComponent<RoadIllustrationLogic>();
+
+            return output;
+        }
+
+        public static RoadLogic ConstructRoad(JunctionLogic startJunction, JunctionLogic endJunction)
+        {
+            GameObject newRoad = GameObject.Instantiate(m_RoadNodeBuiltPrefab);
+            newRoad.transform.position = startJunction.transform.position;
+            Vector3 roadVector = endJunction.transform.position - startJunction.transform.position;
+            newRoad.transform.forward = roadVector;
+            newRoad.transform.localScale = new Vector3(1, 1, roadVector.magnitude);
+            RoadLogic output = newRoad.AddComponent<RoadLogic>();
 
             return output;
         }
