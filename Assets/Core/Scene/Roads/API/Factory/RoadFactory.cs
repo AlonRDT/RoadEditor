@@ -39,6 +39,7 @@ namespace Scene.Roads.API.Factory
         public static JunctionLogic ConstructJunction(int[] squareIndex)
         {
             GameObject newJunction = GameObject.Instantiate(m_RoadNodeBuiltJunctionPrefab, Vector3.zero, Quaternion.identity);
+            newJunction.transform.SetParent(ReferenceManager.JunctionsParent);
             JunctionLogic output = newJunction.AddComponent<JunctionLogic>();
             output.Initialize(squareIndex);
 
@@ -105,6 +106,7 @@ namespace Scene.Roads.API.Factory
         public static RoadLogic ConstructRoad(JunctionLogic startJunction, JunctionLogic endJunction)
         {
             GameObject newRoad = GameObject.Instantiate(m_RoadNodeBuiltPrefab);
+            newRoad.transform.SetParent(ReferenceManager.RoadsParent);
             newRoad.transform.position = startJunction.transform.position;
             Vector3 roadVector = endJunction.transform.position - startJunction.transform.position;
             newRoad.transform.forward = roadVector;

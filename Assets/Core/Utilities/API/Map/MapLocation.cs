@@ -9,7 +9,7 @@ namespace Utilities.API.Map
     {
         private static int s_SquaresPerDimension = 200; // amount of squares in terrain
         private static int s_TerrainSize = 1000; // world size of terrain
-        private static float s_SquareSize => (float)s_TerrainSize / s_SquaresPerDimension;
+        public static float SquareSize => (float)s_TerrainSize / s_SquaresPerDimension;
 
         public static Vector3 GetSquareCenterFromPosition(Vector3 position)
         {
@@ -20,15 +20,15 @@ namespace Utilities.API.Map
         {
             int[] output = new int[2];
 
-            output[0] = Mathf.CeilToInt((position.x - s_SquareSize / 2) / s_SquareSize);
-            output[1] = Mathf.CeilToInt((position.z - s_SquareSize / 2) / s_SquareSize);
+            output[0] = Mathf.CeilToInt((position.x - SquareSize / 2) / SquareSize);
+            output[1] = Mathf.CeilToInt((position.z - SquareSize / 2) / SquareSize);
 
             return output;
         }
 
         public static Vector3 GetWorldSquareCenterFromSquareIndex(int[] squareIndex)
         {
-            Vector3 output = new Vector3(squareIndex[0] * s_SquareSize, 0, squareIndex[1] * s_SquareSize);
+            Vector3 output = new Vector3(squareIndex[0] * SquareSize, 0, squareIndex[1] * SquareSize);
 
             if (Terrain.activeTerrain != null)
             {

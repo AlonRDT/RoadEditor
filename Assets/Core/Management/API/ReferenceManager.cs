@@ -10,36 +10,29 @@ namespace Management.API
     {
         private static ReferenceManager m_Instance;
 
+        // if I had more time I would create a system where similar objects are kept in lists and are pulled out by enum values, ui componenets, managers, scene parents etc...
         [SerializeField] private RoadEditorManager m_RoadEditorManager;
         public static RoadEditorManager RoadEditorManager
         {
-            get
-            {
-                if(m_Instance != null)
-                {
-                    return m_Instance.m_RoadEditorManager;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get => m_Instance != null ? m_Instance.m_RoadEditorManager : null;
         }
 
         [SerializeField] private RoadEditorUI m_RoadEditorUI;
         public static RoadEditorUI RoadEditorUI
         {
-            get
-            {
-                if (m_Instance != null)
-                {
-                    return m_Instance.m_RoadEditorUI;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            get => m_Instance != null ? m_Instance.m_RoadEditorUI : null;
+        }
+
+        [SerializeField] private Transform m_JunctionsParent;
+        public static Transform JunctionsParent
+        {
+            get => m_Instance != null ? m_Instance.m_JunctionsParent : null;
+        }
+
+        [SerializeField] private Transform m_RoadsParent;
+        public static Transform RoadsParent
+        {
+            get => m_Instance != null ? m_Instance.m_RoadsParent : null;
         }
 
         //important! if other objects that are already in scene use refenrece maanger on awake it might not be there

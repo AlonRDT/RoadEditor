@@ -21,7 +21,7 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
 
 
         // I would rather use static propeties instead of using reference manager for this information
-        void Start()
+        void Awake()
         {
             m_RoadEndJunctionTransform = RoadFactory.ConstructJunctionIllustration().transform;
             m_RoadEndJunctionTransform.SetParent(transform);
@@ -45,6 +45,7 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
         {
             m_SelectedJunction = junction;
             transform.position = m_SelectedJunction.transform.position;
+            HideVisual();
         }    
 
         public void UpdateVisual(Vector3 mousePosition)
