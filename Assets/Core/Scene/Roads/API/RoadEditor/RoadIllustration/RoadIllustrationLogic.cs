@@ -45,6 +45,8 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
             float distance = pathVector.magnitude;
             m_TubesParent.forward = pathVector;
 
+            m_RoadEndJunctionTransform.gameObject.SetActive(true);
+
             int lastTubeInViewIndex = Mathf.FloorToInt((distance - m_SpaceBetweenTubes) / (m_SpaceBetweenTubes + m_TubeSize));
             for (int i = 0; i < m_TubeTransforms.Length; i++)
             {
@@ -64,7 +66,16 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
                     m_TubeTransforms[i].gameObject.SetActive(false);
                 }
             }
-            //m_RoadIndicatorTransform.localScale = new Vector3(1, 1, pathVector.magnitude);
+        }
+
+        public void HideVisual()
+        {
+            m_RoadEndJunctionTransform.gameObject.SetActive(false);
+
+            foreach (Transform t in m_TubeTransforms)
+            {
+                t.gameObject.SetActive(false);
+            }
         }
     }
 }

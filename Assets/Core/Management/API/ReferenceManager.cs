@@ -1,4 +1,5 @@
 using Scene.Roads.API.RoadEditor.Manager;
+using Scene.Roads.API.RoadEditor.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,22 @@ namespace Management.API
                 if(m_Instance != null)
                 {
                     return m_Instance.m_RoadEditorManager;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        [SerializeField] private RoadEditorUI m_RoadEditorUI;
+        public static RoadEditorUI RoadEditorUI
+        {
+            get
+            {
+                if (m_Instance != null)
+                {
+                    return m_Instance.m_RoadEditorUI;
                 }
                 else
                 {
