@@ -8,10 +8,10 @@ namespace Utilities.API.Data
     public static class DataLoader
     {
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// try to load asset from resources and print error if not found
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <param name="address">address where asset should be, with asset name inside</param>
+        /// <returns>target asset if exists, otherwise null</returns>
         public static T LoadFromResources<T>(string address) where T : Object
         {
             T target = Resources.Load<T>(address);
@@ -27,10 +27,10 @@ namespace Utilities.API.Data
         }
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// read text written in file from given address
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <param name="address">fulll name of the file</param>
+        /// <returns>text inside target file, null if does not exist</returns>
         public static string ReadTextualFile(string address)
         {
             string output = null;

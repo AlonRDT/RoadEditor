@@ -45,10 +45,9 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
         }
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// Changes the junction from which new road stretches towards mouse
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <param name="junction">The new junction to be the first point of the new road to be spawned</param>
         public void SelectJunction(JunctionLogic junction)
         {
             m_SelectedJunction = junction;
@@ -58,10 +57,9 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
         }
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// called from frame and makes sure to visulaize the size of a new path to be created if user calls for it
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <param name="mousePosition">Real world position of mouse</param>
         public void UpdateVisual(Vector3 mousePosition)
         {
             m_RoadEndJunctionTransform.position = mousePosition;
@@ -93,10 +91,8 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
         }
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// Hides the road indicator that stretches from selected junction to mouse
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public void HideRoadVisual()
         {
             foreach (Transform t in m_TubeTransforms)
@@ -106,20 +102,17 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
         }
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// Hides the new junction visual, usually when hovering above an existing juncture
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public void HideEndJunctionVisual()
         {
             m_RoadEndJunctionTransform.gameObject.SetActive(false);
         }
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// get the index of the point where mouse indicates
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <returns>returns two dimenstional index of other end of path taht should be spawned</returns>
         public int[] GetEndPointSuqareIndex()
         {
             return MapLocation.GetSquareIndexFromPosition(m_RoadEndJunctionTransform.position);

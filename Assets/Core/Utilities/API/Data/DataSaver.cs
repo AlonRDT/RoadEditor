@@ -8,10 +8,11 @@ namespace Utilities.API.Data
     public static class DataSaver
     {
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// writes text into file, if does not exist creates it
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <param name="fullPath">directory where file is to be saved</param>
+        /// <param name="fileName">name with extension of file</param>
+        /// <param name="text">text to save into file</param>
         public static void SaveTextToFile(string fullPath, string fileName, string text)
         {
             if(File.Exists(fullPath + fileName) == false)

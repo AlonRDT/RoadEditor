@@ -38,10 +38,10 @@ namespace Scene.Roads.API.Factory
         // Junctions
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// spawns junction at given index
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <param name="squareIndex">Index where to spawn new junction</param>
+        /// <returns>The logic component of the new junction</returns>
         public static JunctionLogic ConstructJunction(int[] squareIndex)
         {
             GameObject newJunction = GameObject.Instantiate(m_RoadNodeBuiltJunctionPrefab, Vector3.zero, Quaternion.identity);
@@ -53,10 +53,9 @@ namespace Scene.Roads.API.Factory
         }
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// spawns a tube that lloks like a junction, indicates where new junction will be spawned if user calls new road spawn action
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <returns>returns junction shape colored differently</returns>
         public static GameObject ConstructJunctionIllustration()
         {
             GameObject output = GameObject.Instantiate(m_RoadNodeBuiltJunctionPrefab, Vector3.zero, Quaternion.identity);
@@ -81,10 +80,9 @@ namespace Scene.Roads.API.Factory
         // Roads
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// Spawns a tube to be a part of the visual indication of new paths in road illustration
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <returns>returns new tube</returns>
         public static GameObject ConstructSectionUnderConstruction()
         {
             // could have also removed from prefab itself because it is not a real game road but didnt want to change assets I was given.
@@ -108,10 +106,9 @@ namespace Scene.Roads.API.Factory
         }
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// Spawns the component responsible to visualize the raod that will be spawned when user calls such action
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <returns>returns new road indicator</returns>
         public static RoadIllustrationLogic ConstructRoadIllustration()
         {
             RoadIllustrationLogic output = null;
@@ -125,10 +122,11 @@ namespace Scene.Roads.API.Factory
         }
 
         /// <summary>
-        /// Shows text on the left side of the mouse
+        /// spawns a new road between junctions if one does not already exists between them
         /// </summary>
-        /// <param name="text">The point the ray cast hit the object is saved here</param>
-        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
+        /// <param name="startJunction">One end of new section</param>
+        /// <param name="endJunction">Other end of new Section</param>
+        /// <returns>old or new road the stretches between these junctions</returns>
         public static RoadLogic ConstructRoad(JunctionLogic startJunction, JunctionLogic endJunction)
         {
             RoadLogic output = ReferenceManager.RoadsDatabse.GetRoad(startJunction, endJunction);
