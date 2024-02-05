@@ -27,7 +27,7 @@ namespace Scene.Roads.API.Database
             }
         }
 
-        // ToDo: import a decent json library using nugetz or other method and get rif of this class
+        // ToDo: import a decent json library and get rid of this class
         [Serializable]
         public class RoadsData
         {
@@ -36,13 +36,13 @@ namespace Scene.Roads.API.Database
 
         private List<RoadLogic> m_Roads = new List<RoadLogic>();
 
-        private readonly string m_RoadPresetsAddress = Application.streamingAssetsPath + "/RoadPresets/"; 
+        private readonly string m_RoadPresetsAddress = Application.streamingAssetsPath + "/RoadPresets/";
 
         public void Save()
         {
             RoadsData data = new RoadsData();
 
-            foreach(RoadLogic road in m_Roads)
+            foreach (RoadLogic road in m_Roads)
             {
                 data.Roads.Add(new RoadData(road));
             }
@@ -56,14 +56,15 @@ namespace Scene.Roads.API.Database
         {
             string json = DataLoader.ReadTextualFile(m_RoadPresetsAddress + "test.json");
 
-            if(json != null)
+            if (json != null)
             {
-                if(m_Roads.Count == 0)
+                // if no roads were constructed than first junction will not be destroyed since junctions are destroyed inside RoadLogic onDestroy
+                if (m_Roads.Count == 0)
                 {
                     ReferenceManager.RoadEditorManager.DestroySelectedJunction();
                 }
 
-                for(int i = 0; i < m_Roads.Count; i++) 
+                for (int i = 0; i < m_Roads.Count; i++)
                 {
                     Destroy(m_Roads[i].gameObject);
                 }
@@ -72,11 +73,11 @@ namespace Scene.Roads.API.Database
                 RoadsData roadsData = JsonUtility.FromJson<RoadsData>(json);
                 List<JunctionLogic> junctions = new List<JunctionLogic>();
 
-                foreach(RoadData data in roadsData.Roads)
+                foreach (RoadData data in roadsData.Roads)
                 {
                     int[] junctionOneIndex = new int[] { data.JunctionOneIndexX, data.JunctionOneIndexY };
                     JunctionLogic junctionOne = junctions.Find(j => j.IsJuctionIndex(junctionOneIndex) == true);
-                    if(junctionOne == null)
+                    if (junctionOne == null)
                     {
                         junctionOne = RoadFactory.ConstructJunction(junctionOneIndex);
                         junctions.Add(junctionOne);
@@ -123,6 +124,22 @@ namespace Scene.Roads.API.Database
         public void RemoveRoad(RoadLogic road)
         {
             m_Roads.Remove(road);
+        }
+
+        public bool IsJunctionDisconnected(JunctionLogic junction)
+        {
+            bool output = true;
+
+            foreach (RoadLogic road in m_Roads)
+            {
+                if (road.JunctionOne == junction || road.JunctionTwo == junction)
+                {
+                    output = false; 
+                    break;
+                }
+            }
+
+            return output;
         }
     }
 }

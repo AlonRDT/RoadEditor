@@ -7,9 +7,9 @@ namespace Scene.Roads.API
 {
     public class RoadLogic : MonoBehaviour
     {
-        private JunctionLogic m_JunctionOne;
+        private JunctionLogic m_JunctionOne; // junction at one end of road
         public JunctionLogic JunctionOne => m_JunctionOne;
-        private JunctionLogic m_JunctionTwo;
+        private JunctionLogic m_JunctionTwo; // junction at other end of road
         public JunctionLogic JunctionTwo => m_JunctionTwo;
 
         /// <summary>
@@ -30,6 +30,16 @@ namespace Scene.Roads.API
             if(ReferenceManager.RoadsDatabse != null)
             {
                 ReferenceManager.RoadsDatabse.RemoveRoad(this);
+
+                if(ReferenceManager.RoadsDatabse.IsJunctionDisconnected(m_JunctionOne) == true)
+                {
+                    Destroy(m_JunctionOne.gameObject);
+                }
+
+                if (ReferenceManager.RoadsDatabse.IsJunctionDisconnected(m_JunctionTwo) == true)
+                {
+                    Destroy(m_JunctionTwo.gameObject);
+                }
             }
         }
     }
