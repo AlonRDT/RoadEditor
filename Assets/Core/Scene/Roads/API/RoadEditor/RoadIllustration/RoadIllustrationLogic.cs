@@ -39,6 +39,9 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
                 m_TubeTransforms[i].localPosition = new Vector3(0, 0, m_SpaceBetweenTubes + i * (m_SpaceBetweenTubes + m_TubeSize));
                 m_TubeTransforms[i].localScale = new Vector3(1, 1, m_TubeSize);
             }
+
+            HideRoadVisual();
+            HideEndJunctionVisual();
         }
 
         public void SelectJunction(JunctionLogic junction)

@@ -4,18 +4,19 @@ using UnityEngine;
 
 namespace Scene.Roads.API.RoadEditor.Manager.Modes
 {
-    public class RoadDestroyerMode : MonoBehaviour
+    public class RoadDestroyerMode : RoadEditorManagerMode
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        private RoadLogic m_CurrentTarget;
 
+        public void EnterMode(RoadLogic road)
+        {
+            road.MarkAsTarget();
+            m_CurrentTarget = road;
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void ExitMode()
         {
-
+            
         }
     }
 }

@@ -90,13 +90,12 @@ namespace Scene.Roads.API.Factory
             return output;
         }
 
-        public static RoadIllustrationLogic ConstructRoadIllustration(Vector3 position)
+        public static RoadIllustrationLogic ConstructRoadIllustration()
         {
             RoadIllustrationLogic output = null;
 
             Transform newRoadIllustrationObject = new GameObject("Road Illustration").transform;
             newRoadIllustrationObject.SetParent(ReferenceManager.RoadEditorManager.transform);
-            newRoadIllustrationObject.transform.position = position;
 
             output = newRoadIllustrationObject.gameObject.AddComponent<RoadIllustrationLogic>();
 
