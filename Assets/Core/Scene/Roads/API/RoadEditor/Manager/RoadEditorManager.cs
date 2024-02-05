@@ -66,6 +66,7 @@ namespace Scene.Roads.API.RoadEditor.Manager
 
                 if (targetHit == null || pointerOverUI == true)
                 {
+                    m_CurrentMode.ExecuteNullObjectLogic();
                     eventResolved = true;
                 }
 
@@ -221,11 +222,11 @@ namespace Scene.Roads.API.RoadEditor.Manager
         }
 
         /// <summary>
-        /// Selects target junction for road illustration
+        /// deletes selected section if one is selected
         /// </summary>
-        public void SelectJunction(JunctionLogic junction)
+        public void DeleteSection()
         {
-            EnterRoadBuildingMode(junction);
+            m_RoadDestroyerMode.DestroyRoad();
         }
     }
 }

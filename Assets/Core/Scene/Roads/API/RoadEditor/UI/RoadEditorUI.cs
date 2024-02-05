@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Management.API;
+using UnityEngine.UI;
 
 namespace Scene.Roads.API.RoadEditor.UI
 {
     public class RoadEditorUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text m_Text;
+        [SerializeField] private Button m_DeleteSectionButton;
 
         public void UpdateText(string text)
         {
@@ -30,6 +32,21 @@ namespace Scene.Roads.API.RoadEditor.UI
         public void Load()
         {
             ReferenceManager.RoadsDatabse.Load();
+        }
+
+        public void DeleteSection()
+        {
+            ReferenceManager.RoadEditorManager.DeleteSection();
+        }
+
+        public void HideDeleteButton()
+        {
+            m_DeleteSectionButton.gameObject.SetActive(false);
+        }
+
+        public void ShowDeleteButton()
+        {
+            m_DeleteSectionButton.gameObject.SetActive(true);
         }
     }
 }

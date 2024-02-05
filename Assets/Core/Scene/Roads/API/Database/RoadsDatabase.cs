@@ -100,7 +100,7 @@ namespace Scene.Roads.API.Database
                 }
                 else
                 {
-                    ReferenceManager.RoadEditorManager.SelectJunction(m_Roads[m_Roads.Count - 1].JunctionTwo);
+                    ReferenceManager.RoadEditorManager.EnterRoadBuildingMode(m_Roads[m_Roads.Count - 1].JunctionTwo);
                 }
 
             }
@@ -140,6 +140,31 @@ namespace Scene.Roads.API.Database
             }
 
             return output;
+        }
+
+        public RoadLogic GetPreviousRoad(RoadLogic road)
+        {
+            RoadLogic output = null;
+
+            if(m_Roads.Count > 1)
+            {
+                int index = m_Roads.FindIndex(r => r == road);
+                if (index == 0)
+                {
+                    output = m_Roads[m_Roads.Count - 1];
+                }
+                else
+                {
+                    output = m_Roads[index - 1];
+                }
+            }
+
+            return output;
+        }
+
+        public int GetNumOfSections()
+        {
+            return m_Roads.Count;
         }
     }
 }
