@@ -45,11 +45,14 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
         {
             m_SelectedJunction = junction;
             transform.position = m_SelectedJunction.transform.position;
-            HideVisual();
+            HideRoadVisual();
+            HideEndJunctionVisual();
         }    
 
         public void UpdateVisual(Vector3 mousePosition)
         {
+            
+
             m_RoadEndJunctionTransform.position = mousePosition;
             Vector3 pathVector = mousePosition - transform.position;
             float distance = pathVector.magnitude;
@@ -78,14 +81,17 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
             }
         }
 
-        public void HideVisual()
+        public void HideRoadVisual()
         {
-            m_RoadEndJunctionTransform.gameObject.SetActive(false);
-
             foreach (Transform t in m_TubeTransforms)
             {
                 t.gameObject.SetActive(false);
             }
+        }
+
+        public void HideEndJunctionVisual()
+        {
+            m_RoadEndJunctionTransform.gameObject.SetActive(false);
         }
 
         public int[] GetEndPointSuqareIndex()

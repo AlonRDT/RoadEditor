@@ -1,3 +1,4 @@
+using Scene.Roads.API.Database;
 using Scene.Roads.API.RoadEditor.Manager;
 using Scene.Roads.API.RoadEditor.UI;
 using System.Collections;
@@ -33,6 +34,12 @@ namespace Management.API
         public static Transform RoadsParent
         {
             get => m_Instance != null ? m_Instance.m_RoadsParent : null;
+        }
+
+        [SerializeField] private RoadsDatabase m_RoadsDatabse;
+        public static RoadsDatabase RoadsDatabse
+        {
+            get => m_Instance != null ? m_Instance.m_RoadsDatabse : null;
         }
 
         //important! if other objects that are already in scene use refenrece maanger on awake it might not be there

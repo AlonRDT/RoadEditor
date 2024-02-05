@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Management.API;
 
 namespace Scene.Roads.API.RoadEditor.UI
 {
@@ -13,12 +14,22 @@ namespace Scene.Roads.API.RoadEditor.UI
         {
             m_Text.gameObject.SetActive(true);
             m_Text.text = text;
-            m_Text.transform.position = Input.mousePosition;
+            m_Text.transform.position = Input.mousePosition - new Vector3(10, 0, 0);
         }
 
         public void HideText()
         {
             m_Text.gameObject.SetActive(false);
+        }
+
+        public void Save()
+        {
+            ReferenceManager.RoadsDatabse.Save();
+        }
+
+        public void Load()
+        {
+            ReferenceManager.RoadsDatabse.Load();
         }
     }
 }

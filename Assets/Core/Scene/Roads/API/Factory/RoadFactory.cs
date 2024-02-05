@@ -105,13 +105,19 @@ namespace Scene.Roads.API.Factory
 
         public static RoadLogic ConstructRoad(JunctionLogic startJunction, JunctionLogic endJunction)
         {
-            GameObject newRoad = GameObject.Instantiate(m_RoadNodeBuiltPrefab);
-            newRoad.transform.SetParent(ReferenceManager.RoadsParent);
-            newRoad.transform.position = startJunction.transform.position;
-            Vector3 roadVector = endJunction.transform.position - startJunction.transform.position;
-            newRoad.transform.forward = roadVector;
-            newRoad.transform.localScale = new Vector3(1, 1, roadVector.magnitude);
-            RoadLogic output = newRoad.AddComponent<RoadLogic>();
+            RoadLogic output = ReferenceManager.RoadsDatabse.GetRoad(startJunction, endJunction);
+
+            if (output == null)
+            {
+                GameObject newRoad = GameObject.Instantiate(m_RoadNodeBuiltPrefab);
+                newRoad.transform.SetParent(ReferenceManager.RoadsParent);
+                newRoad.transform.position = startJunction.transform.position;
+                Vector3 roadVector = endJunction.transform.position - startJunction.transform.position;
+                newRoad.transform.forward = roadVector;
+                newRoad.transform.localScale = new Vector3(1, 1, roadVector.magnitude);
+                output = newRoad.AddComponent<RoadLogic>();
+                output.Initialize(startJunction, endJunction);
+            }
 
             return output;
         }

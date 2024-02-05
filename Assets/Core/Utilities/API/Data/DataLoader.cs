@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace Utilities.API.Data
@@ -10,7 +11,7 @@ namespace Utilities.API.Data
         {
             T target = Resources.Load<T>(address);
 
-            if(target == null)
+            if (target == null)
             {
                 string[] splitAddress = address.Split('/');
                 string targetName = splitAddress[splitAddress.Length - 1];
@@ -18,6 +19,22 @@ namespace Utilities.API.Data
             }
 
             return target;
+        }
+
+        public static string ReadTextualFile(string address)
+        {
+            string output = null;
+
+            if (File.Exists(address) == true)
+            {
+                output = File.ReadAllText(address);
+            }
+            else
+            {
+                Debug.LogError("tryed to read file: " + address + ", but file does not exist");
+            }
+
+            return output;
         }
     }
 }
