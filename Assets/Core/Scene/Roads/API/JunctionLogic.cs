@@ -8,7 +8,7 @@ namespace Scene.Roads.API
 {
     public class JunctionLogic : MonoBehaviour
     {
-        private int[] m_SquareIndex;
+        private int[] m_SquareIndex; // coordinates on terrain
         public int[] SquareIndex => m_SquareIndex;
 
         /// <summary>

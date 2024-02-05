@@ -151,7 +151,8 @@ namespace Scene.Roads.API.RoadEditor.Manager.Modes
                 }
                 else
                 {
-                    ReferenceManager.RoadEditorUI.UpdateText(ReferenceManager.RoadEditorManager.HeightCostAdd.ToString());
+                    float cost = (Mathf.Max(0, targetPosition.y - JunctionPosition.y)) * ReferenceManager.RoadEditorManager.HeightCostAdd;
+                    ReferenceManager.RoadEditorUI.UpdateText(cost.ToString("F0"));
                     output = true;
                 }
 

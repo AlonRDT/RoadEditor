@@ -38,6 +38,9 @@ namespace Scene.Roads.API.Database
 
         private readonly string m_RoadPresetsAddress = Application.streamingAssetsPath + "/RoadPresets/";
 
+        /// <summary>
+        /// saves alll current raods in scene into test.json inside streaming assets
+        /// </summary>
         public void Save()
         {
             RoadsData data = new RoadsData();
@@ -52,6 +55,9 @@ namespace Scene.Roads.API.Database
             DataSaver.SaveTextToFile(m_RoadPresetsAddress, "test.json", text);
         }
 
+        /// <summary>
+        /// Loads a roads preset if one exists, first destroys all existing sections and afterwards spawns new ones from test.json in streaming assets
+        /// </summary>
         public void Load()
         {
             string json = DataLoader.ReadTextualFile(m_RoadPresetsAddress + "test.json");
@@ -106,6 +112,12 @@ namespace Scene.Roads.API.Database
             }
         }
 
+        /// <summary>
+        /// returns a section if one exists between two given junctions, used mostly to not create a section twice
+        /// </summary>
+        /// <param name="junctionOne">junction at one end of section in question</param>
+        /// <param name="junctionTwo">junction at other end of section in question</param>
+        /// <returns>returns an existing section connecting these two junctions if one exitst, otherwise null</returns>
         public RoadLogic GetRoad(JunctionLogic junctionOne, JunctionLogic junctionTwo)
         {
             RoadLogic output = null;
@@ -116,16 +128,29 @@ namespace Scene.Roads.API.Database
             return output;
         }
 
+        /// <summary>
+        /// adds a road to the database
+        /// </summary>
+        /// <param name="road">new road</param>
         public void AddRoad(RoadLogic road)
         {
             m_Roads.Add(road);
         }
 
+        /// <summary>
+        /// removes a road from the database
+        /// </summary>
+        /// <param name="road">road to remove</param>
         public void RemoveRoad(RoadLogic road)
         {
             m_Roads.Remove(road);
         }
 
+        /// <summary>
+        /// Determine whether a junction is still connected to any roads, used after deleting a section 
+        /// </summary>
+        /// <param name="junction">The junction we wanna know if still connected</param>
+        /// <returns>wether there are still any sections connected to junction</returns>
         public bool IsJunctionDisconnected(JunctionLogic junction)
         {
             bool output = true;
@@ -142,6 +167,11 @@ namespace Scene.Roads.API.Database
             return output;
         }
 
+        /// <summary>
+        /// When deleting a road section get the section that was created before as current section
+        /// </summary>
+        /// <param name="road">The section about to be deleted</param>
+        /// <returns>The Section that will become current active section for next deletion, if there is one</returns>
         public RoadLogic GetPreviousRoad(RoadLogic road)
         {
             RoadLogic output = null;
@@ -162,6 +192,9 @@ namespace Scene.Roads.API.Database
             return output;
         }
 
+        /// <summary>
+        /// I was asked to create this method in excersize demands
+        /// </summary>
         public int GetNumOfSections()
         {
             return m_Roads.Count;

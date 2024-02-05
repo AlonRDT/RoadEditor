@@ -36,6 +36,12 @@ namespace Scene.Roads.API.Factory
         }
 
         // Junctions
+
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public static JunctionLogic ConstructJunction(int[] squareIndex)
         {
             GameObject newJunction = GameObject.Instantiate(m_RoadNodeBuiltJunctionPrefab, Vector3.zero, Quaternion.identity);
@@ -46,6 +52,11 @@ namespace Scene.Roads.API.Factory
             return output;
         }
 
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public static GameObject ConstructJunctionIllustration()
         {
             GameObject output = GameObject.Instantiate(m_RoadNodeBuiltJunctionPrefab, Vector3.zero, Quaternion.identity);
@@ -68,6 +79,12 @@ namespace Scene.Roads.API.Factory
         }
 
         // Roads
+
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public static GameObject ConstructSectionUnderConstruction()
         {
             // could have also removed from prefab itself because it is not a real game road but didnt want to change assets I was given.
@@ -90,6 +107,11 @@ namespace Scene.Roads.API.Factory
             return output;
         }
 
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public static RoadIllustrationLogic ConstructRoadIllustration()
         {
             RoadIllustrationLogic output = null;
@@ -102,6 +124,11 @@ namespace Scene.Roads.API.Factory
             return output;
         }
 
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public static RoadLogic ConstructRoad(JunctionLogic startJunction, JunctionLogic endJunction)
         {
             RoadLogic output = ReferenceManager.RoadsDatabse.GetRoad(startJunction, endJunction);

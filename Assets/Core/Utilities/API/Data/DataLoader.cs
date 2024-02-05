@@ -7,6 +7,11 @@ namespace Utilities.API.Data
 {
     public static class DataLoader
     {
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public static T LoadFromResources<T>(string address) where T : Object
         {
             T target = Resources.Load<T>(address);
@@ -21,6 +26,11 @@ namespace Utilities.API.Data
             return target;
         }
 
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public static string ReadTextualFile(string address)
         {
             string output = null;

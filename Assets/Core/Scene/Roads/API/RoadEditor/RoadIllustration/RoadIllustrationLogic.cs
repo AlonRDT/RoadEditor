@@ -44,18 +44,26 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
             HideEndJunctionVisual();
         }
 
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public void SelectJunction(JunctionLogic junction)
         {
             m_SelectedJunction = junction;
             transform.position = m_SelectedJunction.transform.position;
             HideRoadVisual();
             HideEndJunctionVisual();
-        }    
+        }
 
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public void UpdateVisual(Vector3 mousePosition)
         {
-            
-
             m_RoadEndJunctionTransform.position = mousePosition;
             Vector3 pathVector = mousePosition - transform.position;
             float distance = pathVector.magnitude;
@@ -84,6 +92,11 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
             }
         }
 
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public void HideRoadVisual()
         {
             foreach (Transform t in m_TubeTransforms)
@@ -92,11 +105,21 @@ namespace Scene.Roads.API.RoadEditor.RoadIllustration
             }
         }
 
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public void HideEndJunctionVisual()
         {
             m_RoadEndJunctionTransform.gameObject.SetActive(false);
         }
 
+        /// <summary>
+        /// Shows text on the left side of the mouse
+        /// </summary>
+        /// <param name="text">The point the ray cast hit the object is saved here</param>
+        /// <returns>returns null when off terrain, if terrain square has an object on it returns the object otherwise returns the terrain</returns>
         public int[] GetEndPointSuqareIndex()
         {
             return MapLocation.GetSquareIndexFromPosition(m_RoadEndJunctionTransform.position);
